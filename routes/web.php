@@ -22,8 +22,8 @@ Route::middleware('auth')
     ->name('admin.')
     ->group(function () {
 
-        Route::resource('projects', ProjectController::class)
-            ->only(['index', 'show']);
+        Route::resource('projects', ProjectController::class);
+            
     });
 
 require __DIR__.'/auth.php';

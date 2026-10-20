@@ -23,7 +23,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -31,7 +31,23 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'nullable|string|max:255',
+            'project_url' => 'nullable|url|max:255',
+        ]);
+
+        $project = new Project();
+
+        $project->title = $validatedData['title'];
+        $project->description = $validatedData['description'];
+        $project->image = $validatedData['image'] ?? null;
+        $project->project_url = $validatedData['project_url'] ?? null;
+
+        $project->save();
+
+        return redirect()->route('admin.projects.index');
     }
 
     /**
@@ -47,7 +63,7 @@ class ProjectController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**

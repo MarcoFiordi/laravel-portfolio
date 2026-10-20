@@ -10,6 +10,9 @@
 
     <div class="card">
         <div class="card-body">
+            <a href="{{ route('admin.projects.create') }}" class="btn btn-success mb-3">
+                Nuovo progetto
+            </a>
 
             <table class="table table-striped table-hover">
                 <thead>
