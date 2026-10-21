@@ -31,6 +31,10 @@
                 <a class="nav-link text-white" href="{{ route('profile.edit') }}">
                     Profilo
                 </a>
+
+                <a class="nav-link text-white" href="{{ route('admin.types.index') }}">
+                    Tipologie
+                </a>
             </nav>
         </aside>
 
