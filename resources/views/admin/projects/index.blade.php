@@ -46,6 +46,26 @@
                                 class="btn btn-primary btn-sm">
                                 Dettagli
                             </a>
+
+                            <a href="{{ route('admin.projects.edit', $project) }}"
+                                class="btn btn-warning btn-sm">
+                                Modifica
+                            </a>
+
+                            <form action="{{ route('admin.projects.destroy', $project) }}"
+                                method="POST"
+                                class="d-inline"
+                                onsubmit="return confirm('Sei sicuro di voler eliminare questo progetto')">
+                                
+
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit" class="btn btn-danger btn-sm">
+                                    Elimina
+                                </button>
+                            </form>
+
                         </td>
                     </tr>
 
