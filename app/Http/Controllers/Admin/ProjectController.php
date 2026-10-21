@@ -39,6 +39,7 @@ class ProjectController extends Controller
             'description' => 'required|string',
             'image' => 'nullable|string|max:255',
             'project_url' => 'nullable|url|max:255',
+            'type_id' => 'nullable|exists:types,id',
         ]);
 
         $project = new Project();
@@ -47,6 +48,7 @@ class ProjectController extends Controller
         $project->description = $validatedData['description'];
         $project->image = $validatedData['image'] ?? null;
         $project->project_url = $validatedData['project_url'] ?? null;
+        $project->type_id = $validatedData['type_id'] ?? null;
 
         $project->save();
 
@@ -65,8 +67,10 @@ class ProjectController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Project $project)
-    {
-        return view('admin.projects.edit', compact('project'));
+    {   
+        $types = Type::all();
+
+        return view('admin.projects.edit', compact('project', 'types'));
     }
 
     /**
@@ -79,12 +83,14 @@ class ProjectController extends Controller
             'description' => 'required|string',
             'image' => 'nullable|string|max:255',
             'project_url' => 'nullable|url|max:255',
+            'type_id' => 'nullable|exists:types,id',
         ]);
 
         $project->title = $validatedData['title'];
         $project->description = $validatedData['description'];
         $project->image = $validatedData['image'] ?? null;
         $project->project_url = $validatedData['project_url'] ?? null;
+        $project->type_id = $validatedData['type_id'] ?? null;
 
         $project->save();
 

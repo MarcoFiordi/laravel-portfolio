@@ -17,6 +17,27 @@
                 @method('PATCH')
 
                 <div class="mb-3">
+                    <label for="type_id" class="form-label">Tipologia</label>
+
+                    <select
+                        class="form-select"
+                        id="type_id"
+                        name="type_id">
+
+                        <option value="">Nessuna tipologia</option>
+
+                        @foreach ($types as $type)
+                        <option
+                            value="{{ $type->id }}"
+                            {{ $project->type_id == $type->id ? 'selected' : '' }}>
+                            {{ $type->name }}
+                        </option>
+                        @endforeach
+
+                    </select>
+                </div>
+
+                <div class="mb-3">
                     <label for="title" class="form-label">Titolo</label>
 
                     <input

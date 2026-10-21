@@ -20,6 +20,7 @@
 
                         <th>Titolo</th>
                         <th>Descrizione</th>
+                        <th>Tipologia</th>
                         <th>Link</th>
                         <th>Azioni</th>
                     </tr>
@@ -31,6 +32,9 @@
 
                         <td>{{ $project->title }}</td>
                         <td>{{ $project->description }}</td>
+                        <td>
+                            {{ $project->type?->name ?? 'Nessuna tipologia' }}
+                        </td>
 
                         <td>
                             @if ($project->project_url)
@@ -56,7 +60,7 @@
                                 method="POST"
                                 class="d-inline"
                                 onsubmit="return confirm('Sei sicuro di voler eliminare questo progetto')">
-                                
+
 
                                 @csrf
                                 @method('DELETE')

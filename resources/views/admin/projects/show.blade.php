@@ -20,6 +20,16 @@
             <p class="card-text">
                 {{ $project->description }}
             </p>
+            
+            <p>
+                <strong>Tipologia:</strong>
+
+                @if ($project->type)
+                {{ $project->type->name }}
+                @else
+                Nessuna tipologia
+                @endif
+            </p>
 
             @if ($project->project_url)
             <a href="{{ $project->project_url }}"

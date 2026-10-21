@@ -8,22 +8,7 @@
 
     <h1 class="mb-4">Nuovo progetto</h1>
 
-    <div class="mb-3">
-        <label for="type_id" class="form-label">Tipologia</label>
 
-        <select
-            class="form-select"
-            id="type_id"
-            name="type_id">
-            <option value="">Nessuna tipologia</option>
-
-            @foreach ($types as $type)
-            <option value="{{ $type->id }}">
-                {{ $type->name }}
-            </option>
-            @endforeach
-        </select>
-    </div>
 
     <div class="card">
         <div class="card-body">
@@ -31,7 +16,22 @@
             <form action="{{ route('admin.projects.store') }}" method="POST">
 
                 @csrf
+                <div class="mb-3">
+                    <label for="type_id" class="form-label">Tipologia</label>
 
+                    <select
+                        class="form-select"
+                        id="type_id"
+                        name="type_id">
+                        <option value="">Nessuna tipologia</option>
+
+                        @foreach ($types as $type)
+                        <option value="{{ $type->id }}">
+                            {{ $type->name }}
+                        </option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="mb-3">
                     <label for="title" class="form-label">Titolo</label>
                     <input
