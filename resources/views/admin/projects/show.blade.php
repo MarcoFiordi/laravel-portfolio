@@ -20,7 +20,7 @@
             <p class="card-text">
                 {{ $project->description }}
             </p>
-            
+
             <p>
                 <strong>Tipologia:</strong>
 
@@ -30,6 +30,20 @@
                 Nessuna tipologia
                 @endif
             </p>
+
+            <div class="mb-3">
+                <strong>Tecnologie:</strong>
+
+                @if ($project->technologies->isNotEmpty())
+                @foreach ($project->technologies as $technology)
+                <span class="badge text-bg-primary">
+                    {{ $technology->name }}
+                </span>
+                @endforeach
+                @else
+                Nessuna tecnologia
+                @endif
+            </div>
 
             @if ($project->project_url)
             <a href="{{ $project->project_url }}"

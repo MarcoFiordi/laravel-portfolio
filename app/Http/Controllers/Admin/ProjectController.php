@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
+
+
 
 class ProjectController extends Controller
 {
@@ -25,8 +28,10 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin.projects.create', compact('types'));
+
+        return view('admin.projects.create', compact('types', 'technologies'));
     }
 
     /**
@@ -40,6 +45,8 @@ class ProjectController extends Controller
             'image' => 'nullable|string|max:255',
             'project_url' => 'nullable|url|max:255',
             'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'nullable|array',
+            'technologies.*' => 'exists:technologies,id',
         ]);
 
         $project = new Project();
@@ -51,6 +58,8 @@ class ProjectController extends Controller
         $project->type_id = $validatedData['type_id'] ?? null;
 
         $project->save();
+
+        $project->technologies()->attach($validatedData['technologies'] ?? []);
 
         return redirect()->route('admin.projects.index');
     }
@@ -67,10 +76,11 @@ class ProjectController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Project $project)
-    {   
+    {
         $types = Type::all();
+        $technologies = Technology::all();
 
-        return view('admin.projects.edit', compact('project', 'types'));
+        return view('admin.projects.edit', compact('project', 'types', 'technologies'));
     }
 
     /**
@@ -84,6 +94,8 @@ class ProjectController extends Controller
             'image' => 'nullable|string|max:255',
             'project_url' => 'nullable|url|max:255',
             'type_id' => 'nullable|exists:types,id',
+            'technologies' => 'nullable|array',
+            'technologies.*' => 'exists:technologies,id',
         ]);
 
         $project->title = $validatedData['title'];
@@ -93,6 +105,8 @@ class ProjectController extends Controller
         $project->type_id = $validatedData['type_id'] ?? null;
 
         $project->save();
+
+        $project->technologies()->sync($validatedData['technologies'] ?? []);
 
         return redirect()->route('admin.projects.show', $project);
     }
