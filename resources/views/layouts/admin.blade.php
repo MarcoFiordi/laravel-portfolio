@@ -35,6 +35,10 @@
                 <a class="nav-link text-white" href="{{ route('admin.types.index') }}">
                     Tipologie
                 </a>
+
+                <a class="nav-link text-white" href="{{ route('admin.technologies.index') }}">
+                    Tecnologie
+                </a>
             </nav>
         </aside>
 
